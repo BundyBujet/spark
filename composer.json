@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8",
         "laravolt/avatar": "^6.0",
         "mcamara/laravel-localization": "^2.0",
+        "nutgram/laravel": "^1.6",
         "php-flasher/flasher-laravel": "^1.15",
         "php-flasher/php-flasher": "^1.15",
         "spatie/laravel-permission": "^6.9"

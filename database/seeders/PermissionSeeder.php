@@ -30,6 +30,8 @@ class PermissionSeeder extends Seeder
             'Show Role',
             'Delete Role',
 
+            // Telegram Storage
+            'Manage Telegram Storage',
         ];
 
         foreach ($permissions as $permission) {

@@ -8,6 +8,12 @@
             'icon' => 'ri-user-settings-fill'
         ],
         [
+            'type' => 'link',
+            'route' => 'telegram-storage.index',
+            'label' => 'TELEGRAM_STORAGE',
+            'icon' => 'ri-folder-upload-line'
+        ],
+        [
             'type' => 'group',
             'id' => 'roles',
             'label' => 'ROLES',
@@ -27,11 +33,21 @@
 <ul class="perfect-scrollbar relative h-[calc(100vh-80px)] space-y-0.5 overflow-y-auto overflow-x-hidden p-4 py-0 font-semibold">
     @foreach($menuItems as $item)
         @if($item['type'] === 'link')
-            <x-sidebar.menu-item
-                :href="route($item['route'])"
-                :label="$item['label']"
-                :icon="$item['icon'] ?? null"
-            />
+            @if(($item['route'] ?? '') === 'telegram-storage.index')
+                @can('Manage Telegram Storage')
+                    <x-sidebar.menu-item
+                        :href="route($item['route'])"
+                        :label="$item['label']"
+                        :icon="$item['icon'] ?? null"
+                    />
+                @endcan
+            @else
+                <x-sidebar.menu-item
+                    :href="route($item['route'])"
+                    :label="$item['label']"
+                    :icon="$item['icon'] ?? null"
+                />
+            @endif
         @elseif($item['type'] === 'group')
             <x-sidebar.menu-group
                 :id="$item['id']"

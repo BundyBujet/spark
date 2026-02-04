@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\TelegramStorageController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -49,6 +50,8 @@ Route::group([
         Route::resource('admins', AdminController::class);
     });
 
+    Route::get('telegram-storage/{telegramFile}/download', [TelegramStorageController::class, 'download'])->name('telegram-storage.download');
+    Route::resource('telegram-storage', TelegramStorageController::class, ['parameters' => ['telegram-storage' => 'telegramFile']])->except(['edit', 'update']);
 
     //logout
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');

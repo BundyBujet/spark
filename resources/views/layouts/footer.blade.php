@@ -6,7 +6,7 @@
             BB
         </a>
     </span>
-    {{ __('COPYRIGHT') }} Starter Kit
+    {{ __('COPYRIGHT') }} Spark
     <span id="footer-year"> {{ date('Y') }} </span>
 </div>
 <!-- end footer section -->

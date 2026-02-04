@@ -465,5 +465,22 @@
     "DELETE_CONFIRM": "هل أنت متأكد من حذف هذا العنصر؟",
     "ALREADY_EXISTS": "موجود بالفعل",
     "ROLE_IN_USE": "لا يمكن حذف هذه الصلاحية لأنها مستخدمة حالياً",
-    "PERMISSION_IN_USE": "لا يمكن حذف هذه الصلاحية لأنها مستخدمة حالياً في الأدوار"
+    "PERMISSION_IN_USE": "لا يمكن حذف هذه الصلاحية لأنها مستخدمة حالياً في الأدوار",
+
+    "TELEGRAM_STORAGE": "تخزين تليجرام",
+    "TELEGRAM_STORAGE_UPLOAD": "رفع ملف",
+    "TELEGRAM_FILE_REQUIRED": "يرجى اختيار ملف للرفع.",
+    "TELEGRAM_FILE_INVALID": "الملف المرفوع غير صالح.",
+    "TELEGRAM_FILE_TOO_LARGE": "الملف كبير جداً (الحد الأقصى 2 جيجا).",
+    "TELEGRAM_UPLOAD_SUCCESS": "تم رفع الملف بنجاح.",
+    "TELEGRAM_UPLOAD_ERROR": "فشل رفع الملف.",
+    "TELEGRAM_DOWNLOAD": "تحميل",
+    "TELEGRAM_SOURCE": "المصدر",
+    "TELEGRAM_SOURCE_WEB": "ويب",
+    "TELEGRAM_SOURCE_TELEGRAM": "تليجرام",
+    "TELEGRAM_FILE_NAME": "اسم الملف",
+    "TELEGRAM_SIZE": "الحجم",
+    "TELEGRAM_TYPE": "النوع",
+    "TELEGRAM_DATE": "التاريخ",
+    "TELEGRAM_GET_CHANNEL_ID": "الحصول على معرف القناة"
 }

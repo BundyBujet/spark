@@ -463,5 +463,22 @@
     "DELETE_CONFIRM": "Are you sure you want to delete this item?",
     "ALREADY_EXISTS": "already exists",
     "ROLE_IN_USE": "Cannot delete this role because it is currently assigned to users",
-    "PERMISSION_IN_USE": "Cannot delete this permission because it is currently assigned to roles"
+    "PERMISSION_IN_USE": "Cannot delete this permission because it is currently assigned to roles",
+
+    "TELEGRAM_STORAGE": "Telegram Storage",
+    "TELEGRAM_STORAGE_UPLOAD": "Upload File",
+    "TELEGRAM_FILE_REQUIRED": "Please select a file to upload.",
+    "TELEGRAM_FILE_INVALID": "The uploaded file is invalid.",
+    "TELEGRAM_FILE_TOO_LARGE": "The file is too large (max 2 GB).",
+    "TELEGRAM_UPLOAD_SUCCESS": "File uploaded successfully.",
+    "TELEGRAM_UPLOAD_ERROR": "Failed to upload file.",
+    "TELEGRAM_DOWNLOAD": "Download",
+    "TELEGRAM_SOURCE": "Source",
+    "TELEGRAM_SOURCE_WEB": "Web",
+    "TELEGRAM_SOURCE_TELEGRAM": "Telegram",
+    "TELEGRAM_FILE_NAME": "File Name",
+    "TELEGRAM_SIZE": "Size",
+    "TELEGRAM_TYPE": "Type",
+    "TELEGRAM_DATE": "Date",
+    "TELEGRAM_GET_CHANNEL_ID": "Get Channel ID"
 }

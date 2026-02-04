@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\SSEController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use SergiX44\Nutgram\Nutgram;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/sse', [SSEController::class, 'stream']);
+
+// Telegram webhook (no auth, no CSRF - Telegram server POSTs here)
+Route::post('/telegram/webhook', fn (Nutgram $bot) => $bot->run());
