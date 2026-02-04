@@ -23,8 +23,10 @@ telegram-storage
         <form action="{{ route('telegram-storage.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
-                <label for="file" class="block text-sm font-medium dark:text-white-light mb-2">{{ __('TELEGRAM_FILE_NAME') }}</label>
-                <input type="file" name="file" id="file" class="form-input" accept="*" required />
+                <div>
+                    <label for="file">{{ __('TELEGRAM_FILE_NAME') }}</label>
+                    <input id="file" name="file" type="file" class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary" required />
+                </div>
                 @error('file')
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror

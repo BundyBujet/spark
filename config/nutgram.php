@@ -15,6 +15,9 @@ return [
         'file_server_url' => rtrim(env('TELEGRAM_FILE_SERVER_URL', ''), '/'),
         'file_server_secret' => env('TELEGRAM_FILE_SERVER_SECRET', ''),
         'timeout' => (int) env('NUTGRAM_CLIENT_TIMEOUT', 60),
+        'polling'=>[
+            'timeout' => (int) env('NUTGRAM_POLLING_TIMEOUT', 60),
+        ],
         'file_download_expires_minutes' => (int) env('TELEGRAM_FILE_DOWNLOAD_EXPIRES_MINUTES', 15),
     ],
 

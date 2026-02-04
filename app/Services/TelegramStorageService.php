@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Enums\TelegramFileSource;
+use App\Enums\TelegramFileType;
 use App\Models\TelegramFile;
 use App\Repositories\TelegramFileRepository;
 use Illuminate\Http\StreamedResponse;
@@ -51,8 +53,8 @@ class TelegramStorageService
             'original_name' => $file->getClientOriginalName(),
             'mime_type' => $file->getMimeType(),
             'size' => $file->getSize(),
-            'source' => 'web',
-            'type' => 'document',
+            'source' => TelegramFileSource::Web->value,
+            'type' => TelegramFileType::Document->value,
             'uploaded_by' => $uploadedBy,
         ]);
     }
@@ -62,6 +64,9 @@ class TelegramStorageService
      */
     public function recordFileFromTelegram(array $messageData): TelegramFile
     {
+        $source = $messageData['source'] ?? TelegramFileSource::Telegram->value;
+        $type = $messageData['type'] ?? TelegramFileType::Document->value;
+
         return $this->repository->create([
             'file_id' => $messageData['file_id'],
             'message_id' => $messageData['message_id'] ?? null,
@@ -69,8 +74,8 @@ class TelegramStorageService
             'original_name' => $messageData['original_name'] ?? 'unknown',
             'mime_type' => $messageData['mime_type'] ?? null,
             'size' => $messageData['size'] ?? null,
-            'source' => $messageData['source'] ?? 'telegram',
-            'type' => $messageData['type'] ?? 'document',
+            'source' => $source,
+            'type' => $type,
             'telegram_user_id' => $messageData['telegram_user_id'] ?? null,
         ]);
     }
@@ -89,16 +94,7 @@ class TelegramStorageService
             );
         }
 
-        $path = $file->telegram_file_path;
-        if (empty($path)) {
-            $tgFile = $this->bot->getFile($file->file_id);
-            if (! $tgFile || empty($tgFile->file_path)) {
-                throw new \RuntimeException('Could not get file path from Telegram.');
-            }
-            $path = $tgFile->file_path;
-            $file->update(['telegram_file_path' => $path]);
-        }
-
+        $path = $this->ensureTelegramFilePath($file);
         $path = ltrim(str_replace('\\', '/', $path), '/');
         // Path must be relative to VPS base /root/telegram-bot-api (strip that prefix)
         $path = preg_replace('#^root/telegram-bot-api/#', '', $path);
@@ -121,23 +117,33 @@ class TelegramStorageService
      */
     public function getFileDownloadUrl(TelegramFile $file): string
     {
-        $path = $file->telegram_file_path;
-        if (empty($path)) {
-            $tgFile = $this->bot->getFile($file->file_id);
-            if (! $tgFile || empty($tgFile->file_path)) {
-                throw new \RuntimeException('Could not get file path from Telegram.');
-            }
-            $path = $tgFile->file_path;
-            $file->update(['telegram_file_path' => $path]);
-        }
-
+        $path = $this->ensureTelegramFilePath($file);
         $isLocal = (bool) config('nutgram.config.is_local');
         $path = $this->normalizeFilePathForUrl($path, $isLocal);
 
-        $baseUrl = rtrim(config('nutgram.config.api_url', env('TELEGRAM_BOT_API_URL', 'https://api.telegram.org')), '/');
+        $baseUrl = rtrim(config('nutgram.config.api_url'), '/');
         $token = config('nutgram.token');
 
         return sprintf('%s/file/bot%s/%s', $baseUrl, $token, ltrim($path, '/'));
+    }
+
+    /**
+     * Ensure file has telegram_file_path (fetch from Telegram API if missing). Returns the path.
+     */
+    private function ensureTelegramFilePath(TelegramFile $file): string
+    {
+        $path = $file->telegram_file_path;
+        if (! empty($path)) {
+            return $path;
+        }
+        $tgFile = $this->bot->getFile($file->file_id);
+        if (! $tgFile || empty($tgFile->file_path)) {
+            throw new \RuntimeException('Could not get file path from Telegram.');
+        }
+        $path = $tgFile->file_path;
+        $file->update(['telegram_file_path' => $path]);
+
+        return $path;
     }
 
     /**

@@ -50,8 +50,10 @@ Route::group([
         Route::resource('admins', AdminController::class);
     });
 
-    Route::get('telegram-storage/{telegramFile}/download', [TelegramStorageController::class, 'download'])->name('telegram-storage.download');
-    Route::resource('telegram-storage', TelegramStorageController::class, ['parameters' => ['telegram-storage' => 'telegramFile']])->except(['edit', 'update']);
+    Route::controller(TelegramStorageController::class)->group(function () {
+        Route::get('telegram-storage/{telegramFile}/download', 'download')->name('telegram-storage.download');
+        Route::resource('telegram-storage', TelegramStorageController::class, ['parameters' => ['telegram-storage' => 'telegramFile']])->except(['edit', 'update']);
+    });
 
     //logout
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
