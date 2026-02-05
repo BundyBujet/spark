@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\Models\Admin;
 
@@ -32,5 +33,10 @@ class TelegramFile extends Model
     public function uploadedBy(): BelongsTo
     {
         return $this->belongsTo(Admin::class, 'uploaded_by', 'id');
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class, 'telegram_file_id', 'id');
     }
 }

@@ -6,7 +6,12 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ItemController;
+use App\Http\Controllers\Admin\ItemNotificationController;
+use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\TasksController;
 use App\Http\Controllers\Admin\TelegramStorageController;
+use App\Http\Controllers\Admin\WeeklyReportController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -54,6 +59,12 @@ Route::group([
         Route::get('telegram-storage/{telegramFile}/download', 'download')->name('telegram-storage.download');
         Route::resource('telegram-storage', TelegramStorageController::class, ['parameters' => ['telegram-storage' => 'telegramFile']])->except(['edit', 'update']);
     });
+
+    Route::resource('items', ItemController::class);
+    Route::resource('tags', TagController::class);
+    Route::get('tasks', [TasksController::class, 'index'])->name('tasks.index');
+    Route::get('item-notifications', [ItemNotificationController::class, 'index'])->name('item-notifications.index');
+    Route::get('weekly-reports', [WeeklyReportController::class, 'index'])->name('weekly-reports.index');
 
     //logout
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');

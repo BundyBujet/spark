@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Contracts\NotificationGateway;
 use App\Repositories\TelegramFileRepository;
+use App\Services\LogNotificationGateway;
 use App\Services\TelegramStorageService;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,6 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(NotificationGateway::class, LogNotificationGateway::class);
+
         $this->app->singleton(TelegramFileRepository::class, fn () => new TelegramFileRepository);
         $this->app->singleton(TelegramStorageService::class, function ($app) {
             return new TelegramStorageService(
