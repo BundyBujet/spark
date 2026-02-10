@@ -25,7 +25,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
-define('COUNT', 30);
+define('COUNT', 15);
 Route::group([
     //    'namespace' => 'Admin',
     'prefix' => LaravelLocalization::setLocale() . '/admin',

@@ -75,7 +75,7 @@
                 <div
                     class="relative w-full max-w-[870px] rounded-md bg-[linear-gradient(45deg,#fff9f9_0%,rgba(255,255,255,0)_25%,rgba(255,255,255,0)_75%,_#fff9f9_100%)] p-2 dark:bg-[linear-gradient(52.22deg,#0E1726_0%,rgba(14,23,38,0)_18.66%,rgba(14,23,38,0)_51.04%,rgba(14,23,38,0)_80.07%,#0E1726_100%)]">
                     <div
-                        class="relative flex flex-col justify-center rounded-md bg-white/60 backdrop-blur-lg dark:bg-black/50 px-6 lg:min-h-[758px] py-20">
+                        class="relative flex flex-col justify-center rounded-md bg-white/60 backdrop-blur-lg dark:bg-black/50 px-6  py-20">
                         <div class="absolute top-6 end-6">
                             <div class="dropdown" x-data="dropdown" @click.outside="open = false">
                                 <a href="javascript:;"
@@ -140,13 +140,15 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div>
+                                <div x-data="{ showPassword: false }">
                                     <label for="Password">{{ __('PASSWORD') }}</label>
                                     <div class="relative text-white-dark">
-                                        <input id="Password" type="password" name="password"
+                                        <input id="Password"
+                                            :type="showPassword ? 'text' : 'password'"
+                                            name="password"
                                             placeholder="{{ __('PASSWORD') }}"
-                                            class="form-input ps-10 placeholder:text-white-dark" />
-                                        <span class="absolute top-1/2 -translate-y-1/2 start-4">
+                                            class="form-input ps-10 pe-10 placeholder:text-white-dark" />
+                                        <span class="absolute top-1/2 -translate-y-1/2 start-4 pointer-events-none">
                                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                                                 <path opacity="0.5"
                                                     d="M1.5 12C1.5 9.87868 1.5 8.81802 2.15901 8.15901C2.81802 7.5 3.87868 7.5 6 7.5H12C14.1213 7.5 15.182 7.5 15.841 8.15901C16.5 8.81802 16.5 9.87868 16.5 12C16.5 14.1213 16.5 15.182 15.841 15.841C15.182 16.5 14.1213 16.5 12 16.5H6C3.87868 16.5 2.81802 16.5 2.15901 15.841C1.5 15.182 1.5 14.1213 1.5 12Z"
@@ -165,6 +167,22 @@
                                                     fill="currentColor" />
                                             </svg>
                                         </span>
+                                        <button type="button"
+                                            class="absolute right-4 top-1/2 -translate-y-1/2  text-white-dark hover:text-primary focus:outline-none"
+                                            :aria-label="showPassword ? '{{ __('HIDE_PASSWORD') }}' : '{{ __('SHOW_PASSWORD') }}'"
+                                            @click="showPassword = !showPassword">
+                                            <svg x-show="!showPassword" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline-block">
+                                                <path d="M12 5C7.45455 5 3.57273 7.90909 2 12C3.57273 16.0909 7.45455 19 12 19C16.5455 19 20.4273 16.0909 22 12C20.4273 7.90909 16.5455 5 12 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <svg x-show="showPassword" x-cloak width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline-block">
+                                                <path d="M3 3L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                                <path d="M10.584 10.587C10.2087 10.9623 9.99072 11.4708 9.99072 12C9.99072 12.5292 10.2087 13.0377 10.584 13.413C10.9593 13.7883 11.4678 14.0063 11.997 14.0063C12.5262 14.0063 13.0347 13.7883 13.41 13.413" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                                <path d="M7.363 7.36C4.68 9.537 3.5 12 3.5 12C4.57 14.07 6.29 16 8.5 17.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                                <path d="M16.5 17.5C18.71 16 20.43 14.07 21.5 12C21.5 12 20.32 9.537 17.637 7.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                                <path d="M14.006 9.99C14.5352 9.99 15.0437 10.208 15.419 10.583C15.7943 10.9583 16.0123 11.4668 16.0123 11.996C16.0123 12.5252 15.7943 13.0337 15.419 13.409" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
                                 <button type="submit"
