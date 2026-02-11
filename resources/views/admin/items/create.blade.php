@@ -139,19 +139,11 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="tags"
-                            class="block text-sm font-semibold mb-2 dark:text-white-light">{{ __('ITEMS_TAGS') }}</label>
-                        <select id="tags" name="tags[]" multiple
-                            class="form-input @error('tags') !border-danger @enderror" size="4">
-                            @foreach ($tags as $tag)
-                                <option value="{{ $tag->id }}" @selected(in_array($tag->id, old('tags', [])))>{{ $tag->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <p class="text-muted text-sm mt-1">{{ __('ITEMS_TAGS_HINT') }}</p>
-                        @error('tags')
-                            <div class="text-danger mt-1 text-sm">{{ $message }}</div>
-                        @enderror
+                        <x-items-tag-selector
+                            :tags="$tags"
+                            :selected-ids="old('tags', [])"
+                            name="tags"
+                            :error="$errors->first('tags')" />
                     </div>
                 </div>
             </div>

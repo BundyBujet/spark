@@ -90,16 +90,12 @@
             </div>
         @endif
 
-        @if ($item->tags->isNotEmpty())
-            <div class="mb-5">
-                <dt class="text-muted mb-2">{{ __('ITEMS_TAGS') }}</dt>
-                <dd>
-                    @foreach ($item->tags as $tag)
-                        <span class="badge bg-outline-primary mr-1">{{ $tag->name }}</span>
-                    @endforeach
-                </dd>
-            </div>
-        @endif
+        <div class="mb-5">
+            <dt class="text-muted mb-2">{{ __('ITEMS_TAGS') }}</dt>
+            <dd>
+                <x-items-tag-display :tags="$item->tags" />
+            </dd>
+        </div>
 
         @if ($item->task)
             <div class="mb-5 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
