@@ -9,6 +9,20 @@
 @endsection
 
 @section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/markdown-editor.css') }}" />
+    <style>
+    .item-content-rendered a {
+        color: #4361ee;
+        text-decoration: underline;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+    .item-content-rendered a:hover,
+    .item-content-rendered a:focus {
+        color: #264fa5;
+        text-decoration: underline;
+    }
+    </style>
 @endsection
 
 @section('content')
@@ -86,7 +100,9 @@
         @if ($item->content)
             <div class="mb-5">
                 <dt class="text-muted mb-2">{{ __('ITEMS_CONTENT') }}</dt>
-                <dd class="whitespace-pre-wrap dark:text-white-light">{{ $item->content }}</dd>
+                <dd class="item-content-rendered max-h-96 overflow-y-auto rounded-md border border-[#e0e6ed] p-4 dark:border-[#1b2e4b] dark:text-white-light">
+                    {!! \Illuminate\Support\Str::markdown($item->content) !!}
+                </dd>
             </div>
         @endif
 

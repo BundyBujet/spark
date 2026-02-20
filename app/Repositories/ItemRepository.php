@@ -10,7 +10,7 @@ class ItemRepository
 {
     public function list(array $filters = [], int $perPage = 30): LengthAwarePaginator
     {
-        $query = Item::query()->orderByDesc('created_at');
+        $query = Item::query()->with('tags')->orderByDesc('created_at');
 
         if (! empty($filters['type'])) {
             $query->where('type', $filters['type']);

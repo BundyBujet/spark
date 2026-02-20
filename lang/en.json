@@ -508,6 +508,7 @@
     "ITEMS_EXPIRING_SOON": "Expiring soon",
     "ITEMS_SOURCE": "Source",
     "ITEMS_SOURCE_OPTIONAL": "— Optional —",
+    "ITEMS_TAG": "Tag",
     "ITEMS_TAGS": "Tags",
     "ITEMS_TAGS_HINT": "Hold Ctrl/Cmd to select multiple",
     "ITEMS_TAGS_SELECT": "Select tags",

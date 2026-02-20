@@ -89,7 +89,7 @@
         x-transition:leave="transition ease-in duration-150"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60"
+        class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 z-999"
         @click.self="open = false">
         <div
             x-show="open"

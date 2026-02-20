@@ -1,27 +1,264 @@
-.dark .markdown-editor .editor-toolbar i.separator {
-    border-color: #888ea8;
+/* EasyMDE – light theme (matches form-input / panel) */
+.markdown-editor .editor-toolbar,
+.markdown-editor .EasyMDEContainer .CodeMirror {
+    border-color: #e0e6ed;
+    color: #0e1726;
+}
+
+.markdown-editor .editor-toolbar {
+    background-color: #fff;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-width: 1px;
+    border-bottom: none;
+}
+
+.markdown-editor .EasyMDEContainer .CodeMirror {
+    background-color: #fff;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-width: 1px;
+    border-top: none;
+}
+
+.markdown-editor .editor-toolbar i.separator {
+    border-left-color: #e0e6ed;
     border-right: none;
 }
 
-.dark .markdown-editor .EasyMDEContainer .CodeMirror,
-.dark .markdown-editor .editor-preview {
-    background-color: #121e32;
-}
-
-.markdown-editor .editor-toolbar,
-.markdown-editor .EasyMDEContainer .CodeMirror{
-    border-color: #ccc;
+.markdown-editor .editor-toolbar button:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    border-color: transparent;
     color: #0e1726;
 }
+
+.markdown-editor .editor-preview,
+.markdown-editor .editor-preview-side {
+    background-color: #fff;
+    border-color: #e0e6ed;
+    color: #0e1726;
+}
+
+/* EasyMDE – dark theme (matches .dark form-input / quill) */
 .dark .markdown-editor .editor-toolbar,
 .dark .markdown-editor .EasyMDEContainer .CodeMirror,
-.dark .markdown-editor .editor-preview {
+.dark .markdown-editor .editor-preview,
+.dark .markdown-editor .editor-preview-side {
     border-color: #17263c;
     color: #888ea8 !important;
 }
 
-.dark .markdown-editor .editor-toolbar button.active, .editor-toolbar button:hover {
-    background-color: transparent !important;
+.dark .markdown-editor .editor-toolbar {
+    background-color: #0e1726;
+}
+
+.dark .markdown-editor .EasyMDEContainer .CodeMirror,
+.dark .markdown-editor .editor-preview,
+.dark .markdown-editor .editor-preview-side {
+    background-color: #121e32;
+}
+
+.dark .markdown-editor .editor-toolbar i.separator {
+    border-color: #17263c;
+    border-right: none;
+}
+
+.dark .markdown-editor .editor-toolbar button:hover,
+.dark .markdown-editor .editor-toolbar button.active {
+    background-color: rgba(255, 255, 255, 0.06) !important;
     border-color: transparent !important;
+    color: #e0e6ed !important;
+}
+
+/* CodeMirror internals – dark */
+.dark .markdown-editor .CodeMirror-cursor {
+    border-left-color: #e0e6ed;
+}
+
+.dark .markdown-editor .CodeMirror-gutters {
+    background-color: #0e1726;
+    border-right-color: #17263c;
+}
+
+.dark .markdown-editor .CodeMirror-linenumber {
+    color: #506690;
+}
+
+.dark .markdown-editor .CodeMirror-line::selection,
+.dark .markdown-editor .CodeMirror-line > span::selection {
+    background: rgba(67, 97, 238, 0.3);
+}
+
+.dark .markdown-editor .CodeMirror-placeholder {
+    color: #506690 !important;
+}
+
+.dark .markdown-editor .editor-preview pre,
+.dark .markdown-editor .editor-preview-side pre {
+    background-color: #0e1726;
+    border-color: #17263c;
+    color: #888ea8;
+}
+
+.dark .markdown-editor .editor-preview code,
+.dark .markdown-editor .editor-preview-side code {
+    background-color: #0e1726;
+    color: #e0e6ed;
+}
+
+.dark .markdown-editor .editor-preview blockquote,
+.dark .markdown-editor .editor-preview-side blockquote {
+    border-left-color: #17263c;
+    color: #888ea8;
+}
+
+.dark .markdown-editor .editor-preview table td,
+.dark .markdown-editor .editor-preview table th,
+.dark .markdown-editor .editor-preview-side table td,
+.dark .markdown-editor .editor-preview-side table th {
+    border-color: #17263c;
+}
+
+.dark .markdown-editor .editor-preview hr,
+.dark .markdown-editor .editor-preview-side hr {
+    border-color: #17263c;
+}
+
+/* Rendered markdown (show page) – light */
+.item-content-rendered {
+    color: #0e1726;
+    line-height: 1.6;
+}
+
+.item-content-rendered h1,
+.item-content-rendered h2,
+.item-content-rendered h3,
+.item-content-rendered h4,
+.item-content-rendered h5,
+.item-content-rendered h6 {
+    font-weight: 600;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.item-content-rendered h1 { font-size: 1.5rem; }
+.item-content-rendered h2 { font-size: 1.25rem; }
+.item-content-rendered h3 { font-size: 1.125rem; }
+.item-content-rendered h4,
+.item-content-rendered h5,
+.item-content-rendered h6 { font-size: 1rem; }
+
+.item-content-rendered p {
+    margin-bottom: 0.75em;
+}
+
+.item-content-rendered ul,
+.item-content-rendered ol {
+    margin-bottom: 0.75em;
+    padding-left: 1.5em;
+}
+
+.item-content-rendered li {
+    margin-bottom: 0.25em;
+}
+
+.item-content-rendered code {
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 4px;
+    padding: 0.15em 0.4em;
+    font-size: 0.9em;
+}
+
+.item-content-rendered pre {
+    background-color: #f1f5f9;
+    border: 1px solid #e0e6ed;
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 0.75em;
+}
+
+.item-content-rendered pre code {
+    background: none;
+    padding: 0;
+}
+
+.item-content-rendered a {
     color: #4361ee;
+    text-decoration: underline;
+}
+
+.item-content-rendered a:hover {
+    color: #3337b8;
+}
+
+.item-content-rendered blockquote {
+    border-left: 4px solid #e0e6ed;
+    margin: 0.75em 0;
+    padding-left: 1em;
+    color: #64748b;
+}
+
+.item-content-rendered hr {
+    border: none;
+    border-top: 1px solid #e0e6ed;
+    margin: 1em 0;
+}
+
+.item-content-rendered table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 0.75em;
+}
+
+.item-content-rendered th,
+.item-content-rendered td {
+    border: 1px solid #e0e6ed;
+    padding: 0.5em 0.75em;
+    text-align: left;
+}
+
+.item-content-rendered th {
+    font-weight: 600;
+    background-color: #f8fafc;
+}
+
+/* Rendered markdown – dark */
+.dark .item-content-rendered {
+    color: #e0e6ed;
+}
+
+.dark .item-content-rendered code {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .item-content-rendered pre {
+    background-color: #121e32;
+    border-color: #17263c;
+}
+
+.dark .item-content-rendered a {
+    color: #7c8fd4;
+}
+
+.dark .item-content-rendered a:hover {
+    color: #a5b4fc;
+}
+
+.dark .item-content-rendered blockquote {
+    border-left-color: #17263c;
+    color: #888ea8;
+}
+
+.dark .item-content-rendered hr {
+    border-top-color: #17263c;
+}
+
+.dark .item-content-rendered th,
+.dark .item-content-rendered td {
+    border-color: #17263c;
+}
+
+.dark .item-content-rendered th {
+    background-color: #0e1726;
 }

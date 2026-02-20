@@ -9,6 +9,7 @@
 @endsection
 
 @section('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/nice-select2.css') }}" />
     {{-- Minimal card styles (complements Tailwind, scoped to avoid conflict) --}}
     <style>
         .items-index-card {
@@ -16,9 +17,8 @@
             max-height: 320px;
             /* max-width: 290px; */
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-            border-color: rgb(67 97 238 / 0.35);
             box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            border-color: rgb(67 97 238 / 0.35);
+
         }
 
         .items-index-card:hover {
@@ -36,8 +36,72 @@
             transform: scale(1.1);
         }
 
-        .\32xl\:grid-cols-5{
+        .\32xl\:grid-cols-5 {
             grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+
+
+
+        /* Dark theme */
+        .dark .items-filter-form .items-filter-select-wrap .nice-select {
+            border-color: #17263c;
+            background-color: #121e32;
+            color: #888ea8;
+        }
+
+        .dark .items-filter-form .items-filter-select-wrap .nice-select:hover,
+        .dark .items-filter-form .items-filter-select-wrap .nice-select:focus,
+        .dark .items-filter-form .items-filter-select-wrap .nice-select.open {
+            border-color: #4361ee;
+        }
+
+        .dark .items-filter-form .items-filter-select-wrap .nice-select:after {
+            border-color: #888ea8;
+        }
+
+        .dark .items-filter-form .items-filter-select-wrap .nice-select .list {
+            background-color: #121e32;
+            border-color: #17263c;
+        }
+
+        .dark .items-filter-form .items-filter-select-wrap .nice-select .option {
+            color: #888ea8;
+        }
+
+        .dark .items-filter-form .items-filter-select-wrap .nice-select .option:hover,
+        .dark .items-filter-form .items-filter-select-wrap .nice-select .option.focus {
+            background-color: #1b2e4b;
+            color: #e0e6ed;
+        }
+
+        .dark .items-filter-form .items-filter-select-wrap .nice-select .nice-select-search {
+            background-color: #121e32;
+            border-color: #17263c;
+            color: #e0e6ed;
+        }
+
+        /* HTML:  */
+        .ribbon {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .ribbon {
+            --f: .5em;
+            /* control the folded part */
+            position: absolute;
+            top: 0;
+            left: 0;
+            line-height: 1;
+            padding-inline: 1lh;
+            padding-bottom: var(--f);
+            border-image: conic-gradient(#0008 0 0) 51%/var(--f);
+            clip-path: polygon(100% calc(100% - var(--f)), 100% 100%, calc(100% - var(--f)) calc(100% - var(--f)), var(--f) calc(100% - var(--f)), 0 100%, 0 calc(100% - var(--f)), 999px calc(100% - var(--f) - 999px), calc(100% - 999px) calc(100% - var(--f) - 999px));
+            transform: translate(calc((cos(45deg) - 1)*100%), -100%) rotate(-45deg);
+            transform-origin: 100% 100%;
+            background-color: #00ab55;
+            /* the main color  */
         }
     </style>
 @endsection
@@ -52,12 +116,13 @@
             </a>
         </div>
 
-        <form method="GET" action="{{ route('items.index') }}" class="mb-5 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+        <form method="GET" action="{{ route('items.index') }}"
+            class="items-filter-form mb-5 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
             <div class="flex flex-wrap items-end gap-3">
-                <div>
+                <div class="items-filter-select-wrap">
                     <label for="type"
                         class="block text-sm font-medium mb-1 dark:text-white-light">{{ __('ITEMS_TYPE') }}</label>
-                    <select id="type" name="type" class="form-select form-select-sm">
+                    <select id="type" name="type" class=" ">
                         <option value="">{{ __('ITEMS_ALL') }}</option>
                         @foreach (\App\Enums\ItemType::cases() as $case)
                             <option value="{{ $case->value }}" @selected(request('type') === $case->value)>{{ ucfirst($case->value) }}
@@ -65,10 +130,10 @@
                         @endforeach
                     </select>
                 </div>
-                <div>
+                <div class="items-filter-select-wrap">
                     <label for="status"
                         class="block text-sm font-medium mb-1 dark:text-white-light">{{ __('ITEMS_STATUS') }}</label>
-                    <select id="status" name="status" class="form-select form-select-sm">
+                    <select id="status" name="status" class=" ">
                         <option value="">{{ __('ITEMS_ALL') }}</option>
                         @foreach (\App\Enums\ItemStatus::cases() as $case)
                             <option value="{{ $case->value }}" @selected(request('status') === $case->value)>{{ ucfirst($case->value) }}
@@ -76,10 +141,10 @@
                         @endforeach
                     </select>
                 </div>
-                <div>
+                <div class="items-filter-select-wrap">
                     <label for="source"
                         class="block text-sm font-medium mb-1 dark:text-white-light">{{ __('ITEMS_SOURCE') }}</label>
-                    <select id="source" name="source" class="form-select form-select-sm">
+                    <select id="source" name="source" class=" ">
                         <option value="">{{ __('ITEMS_ALL') }}</option>
                         @foreach (\App\Enums\ItemSource::cases() as $case)
                             <option value="{{ $case->value }}" @selected(request('source') === $case->value)>{{ ucfirst($case->value) }}
@@ -87,25 +152,29 @@
                         @endforeach
                     </select>
                 </div>
-                <div>
+                <div class="items-filter-select-wrap">
                     <label for="tag_id"
                         class="block text-sm font-medium mb-1 dark:text-white-light">{{ __('ITEMS_TAG') }}</label>
-                    <select id="tag_id" name="tag_id" class="form-select form-select-sm">
+                    <select id="tag_id" name="tag_id" class=" ">
                         <option value="">{{ __('ITEMS_ALL') }}</option>
                         @foreach ($tags as $tag)
                             <option value="{{ $tag->id }}" @selected(request('tag_id') == $tag->id)>{{ $tag->name }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 mb-2">
                     <input type="hidden" name="expiring_soon" value="0">
                     <input type="checkbox" id="expiring_soon" name="expiring_soon" value="1" class="form-checkbox"
                         @checked(request('expiring_soon'))>
                     <label for="expiring_soon"
-                        class="text-sm dark:text-white-light">{{ __('ITEMS_EXPIRING_SOON') }}</label>
+                        class="text-sm dark:text-white-light mb-0">{{ __('ITEMS_EXPIRING_SOON') }}</label>
                 </div>
-                <button type="submit" class="btn btn-sm btn-primary">{{ __('ITEMS_FILTER') }}</button>
-                <a href="{{ route('items.index') }}" class="btn btn-sm btn-outline-secondary">{{ __('ITEMS_CLEAR') }}</a>
+                <div class="flex items-center gap-2 mb-2">
+
+                    <button type="submit" class="btn btn-sm btn-primary">{{ __('ITEMS_FILTER') }}</button>
+                    <a href="{{ route('items.index') }}"
+                        class="btn btn-sm btn-outline-secondary">{{ __('ITEMS_CLEAR') }}</a>
+                </div>
             </div>
         </form>
 
@@ -133,9 +202,13 @@
                                 default => 'ri-price-tag-3-line',
                             }
                             : 'ri-file-list-3-line';
+                        $isDone = $item->tags->contains(fn($t) => \App\Models\Tag::normalizeName($t->name) === 'done');
                     @endphp
                     <div
-                        class="items-index-card relative flex min-h-[280px] max-h-[320px] flex-col overflow-hidden rounded-lg border border-[#e0e6ed] bg-white pb-14 dark:border-[#1b2e4b] dark:bg-[#0e1726]">
+                        class="items-index-card relative flex min-h-[280px] max-h-[320px] flex-col overflow-hidden rounded-lg border {{ $isDone ? 'border-success' : 'border-blue-500 dark:border-[#1b2e4b]' }} bg-white pb-14 dark:bg-[#0e1726]">
+                        @if ($isDone)
+                            <div class="ribbon">{{ __('ITEMS_TAGS_DONE') }}</div>
+                        @endif
                         <div class="flex flex-col min-h-0 flex-1 px-5 py-5">
                             {{-- Header: type icon + type badge + date, 3-dot dropdown --}}
                             <div class="flex w-full items-start justify-between gap-2">
@@ -199,7 +272,7 @@
                                 <h4 class="line-clamp-2 overflow-hidden font-semibold text-dark dark:text-white-light">
                                     {{ $item->title }}</h4>
                                 <p class="break-all mt-2 min-h-0 flex-1 text-sm text-white-dark">
-                                    {{ \Illuminate\Support\Str::limit(strip_tags($item->content ?? ''), 100, '...') }}
+                                    {{ \Illuminate\Support\Str::limit(strip_tags(\Illuminate\Support\Str::markdown($item->content ?? '')), 100, '...') }}
                                 </p>
                             </div>
                         </div>
@@ -256,4 +329,16 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('assets/js/nice-select2.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var options = {
+                searchable: true
+            };
+            ["type", "status", "source", "tag_id"].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) NiceSelect.bind(el, options);
+            });
+        });
+    </script>
 @endsection

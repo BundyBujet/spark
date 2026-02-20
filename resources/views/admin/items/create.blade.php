@@ -9,7 +9,11 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" type="text/css" href={{asset("assets/css/nice-select2.css")}} />
+    <link rel="stylesheet" type="text/css" href={{ asset('assets/css/nice-select2.css') }} />
+    <link rel="stylesheet" type="text/css" href={{ asset('assets/css/easymde.min.css') }} />
+    <link rel="stylesheet" type="text/css" href={{ asset('assets/css/markdown-editor.css') }} />
+
+
 @endsection
 
 @section('content')
@@ -33,7 +37,7 @@
 
         <form action="{{ route('items.store') }}" method="POST">
             @csrf
-            <div >
+            <div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                     <div>
                         <label for="title"
@@ -104,7 +108,7 @@
                         <div>
                             <label for="telegram_file_id"
                                 class="block text-sm font-semibold mb-2 dark:text-white-light">{{ __('TELEGRAM_FILE') }}</label>
-                            <select id="telegram_file_id" name="telegram_file_id" >
+                            <select id="telegram_file_id" name="telegram_file_id">
                                 <option value="">{{ __('TELEGRAM_FILE_REQUIRED') }}</option>
                                 @foreach ($telegramFiles as $file)
                                     <option value="{{ $file->id }}" @selected(old('telegram_file_id', $file->telegram_file_id) === $file->id)>
@@ -120,8 +124,10 @@
                 <div class="mb-5">
                     <label for="content"
                         class="block text-sm font-semibold mb-2 dark:text-white-light">{{ __('ITEMS_CONTENT') }}</label>
-                    <textarea id="content" name="content" rows="4" class="form-input @error('content') !border-danger @enderror"
-                        placeholder="{{ __('ITEMS_CONTENT') }}">{{ old('content') }}</textarea>
+                    <div class="markdown-editor">
+                        <textarea id="content" name="content" rows="4" class="form-input @error('content') !border-danger @enderror"
+                            placeholder="{{ __('ITEMS_CONTENT') }}">{{ old('content') }}</textarea>
+                    </div>
                     @error('content')
                         <div class="text-danger mt-1 text-sm">{{ $message }}</div>
                     @enderror
@@ -139,11 +145,7 @@
                         @enderror
                     </div>
                     <div>
-                        <x-items-tag-selector
-                            :tags="$tags"
-                            :selected-ids="old('tags', [])"
-                            name="tags"
-                            :error="$errors->first('tags')" />
+                        <x-items-tag-selector :tags="$tags" :selected-ids="old('tags', [])" name="tags" :error="$errors->first('tags')" />
                     </div>
                 </div>
             </div>
@@ -161,14 +163,25 @@
 @endsection
 
 @section('js')
-<script src={{asset("assets/js/nice-select2.js")}}></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function(e) {
-        // seachable
-        var options = {
-            searchable: true
-        };
-        NiceSelect.bind(document.getElementById("telegram_file_id"), options);
-    });
-</script>
+    <script src={{ asset('assets/js/nice-select2.js') }}></script>
+    <script src={{ asset('assets/js/easymde.min.js') }}></script>
+    <!-- nice-select2 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function(e) {
+            // seachable
+            var options = {
+                searchable: true
+            };
+            NiceSelect.bind(document.getElementById("telegram_file_id"), options);
+        });
+    </script>
+    <!-- easymde -->
+    <script>
+        const easymde1 = new EasyMDE({
+            element: document.getElementById('content'),
+            initialValue: `{{ old('content') }}`,
+            maxHeight: '320px',
+            hideIcons: ['side-by-side', 'fullscreen']
+        });
+    </script>
 @endsection

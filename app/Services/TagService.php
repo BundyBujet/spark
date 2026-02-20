@@ -13,11 +13,19 @@ class TagService
 
     public function createTag(array $data): Tag
     {
+        if (isset($data['name'])) {
+            $data['name'] = Tag::normalizeName($data['name']);
+        }
+
         return $this->repository->create($data);
     }
 
     public function updateTag(Tag $tag, array $data): Tag
     {
+        if (isset($data['name'])) {
+            $data['name'] = Tag::normalizeName($data['name']);
+        }
+
         return $this->repository->update($tag, $data);
     }
 

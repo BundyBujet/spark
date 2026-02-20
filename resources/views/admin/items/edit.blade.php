@@ -10,6 +10,8 @@
 
 @section('css')
     <link rel="stylesheet" type="text/css" href={{ asset('assets/css/nice-select2.css') }} />
+    <link rel="stylesheet" type="text/css" href={{ asset('assets/css/easymde.min.css') }} />
+    <link rel="stylesheet" type="text/css" href={{ asset('assets/css/markdown-editor.css') }} />
 @endsection
 
 @section('content')
@@ -122,8 +124,10 @@
                 <div class="mb-5">
                     <label for="content"
                         class="block text-sm font-semibold mb-2 dark:text-white-light">{{ __('ITEMS_CONTENT') }}</label>
-                    <textarea id="content" name="content" rows="4" class="form-input @error('content') !border-danger @enderror"
-                        placeholder="{{ __('ITEMS_CONTENT') }}">{{ old('content', $item->content) }}</textarea>
+                    <div class="markdown-editor">
+                        <textarea id="content" name="content" rows="4" class="form-input @error('content') !border-danger @enderror"
+                            placeholder="{{ __('ITEMS_CONTENT') }}">{{ old('content', $item->content) }}</textarea>
+                    </div>
                     @error('content')
                         <div class="text-danger mt-1 text-sm">{{ $message }}</div>
                     @enderror
@@ -162,15 +166,21 @@
 
 @section('js')
     <script src={{ asset('assets/js/nice-select2.js') }}></script>
-
+    <script src={{ asset('assets/js/easymde.min.js') }}></script>
     <script>
         document.addEventListener("DOMContentLoaded", function(e) {
-            // seachable
             var options = {
                 searchable: true
             };
             NiceSelect.bind(document.getElementById("telegram_file_id"), options);
-
+        });
+    </script>
+    <script>
+        const easymdeEdit = new EasyMDE({
+            element: document.getElementById('content'),
+            initialValue: `{{ old('content', $item->content) }}`,
+            maxHeight: '320px',
+            hideIcons: ['side-by-side', 'fullscreen']
         });
     </script>
 @endsection

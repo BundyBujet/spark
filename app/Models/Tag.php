@@ -11,6 +11,18 @@ class Tag extends Model
         'name',
     ];
 
+    /**
+     * Normalize tag name: lowercase and spaces to underscores (snake_case).
+     */
+    public static function normalizeName(string $name): string
+    {
+        $name = trim($name);
+        $name = strtolower($name);
+        $name = (string) preg_replace('/\s+/', '_', $name);
+        $name = (string) preg_replace('/_+/', '_', $name); // collapse multiple underscores
+        return trim($name, '_');
+    }
+
     public function items(): BelongsToMany
     {
         return $this->belongsToMany(Item::class, 'item_tag');

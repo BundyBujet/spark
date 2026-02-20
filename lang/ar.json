@@ -510,6 +510,7 @@
     "ITEMS_EXPIRING_SOON": "قريباً ينتهي",
     "ITEMS_SOURCE": "المصدر",
     "ITEMS_SOURCE_OPTIONAL": "— اختياري —",
+    "ITEMS_TAG": "الوسم",
     "ITEMS_TAGS": "الوسوم",
     "ITEMS_TAGS_HINT": "استخدم Ctrl/Cmd لاختيار أكثر من واحد",
     "ITEMS_TAGS_SELECT": "اختر الوسوم",
