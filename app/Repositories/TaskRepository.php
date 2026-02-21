@@ -2,9 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Enums\TaskStatus;
 use App\Models\Item;
 use App\Models\Task;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class TaskRepository
 {
@@ -54,5 +56,22 @@ class TaskRepository
         $task->update($data);
 
         return $task->fresh();
+    }
+
+    /**
+     * Tasks due today (date only, app timezone) that are not done, with item loaded.
+     *
+     * @return Collection<int, Task>
+     */
+    public function getTasksDueTodayNotDone(): Collection
+    {
+        $today = now()->toDateString();
+
+        return Task::query()
+            ->with('item')
+            ->whereDate('due_date', $today)
+            ->where('task_status', '!=', TaskStatus::Done->value)
+            ->orderBy('due_date')
+            ->get();
     }
 }

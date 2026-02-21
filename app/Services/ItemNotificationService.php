@@ -43,6 +43,14 @@ class ItemNotificationService
     }
 
     /**
+     * Record that a report notification was sent (no specific item, e.g. daily report).
+     */
+    public function recordReportSent(string $notificationType, string $channel): void
+    {
+        $this->notificationRepository->markReportSent($notificationType, $channel);
+    }
+
+    /**
      * Check if a given notification type was already sent for this item.
      */
     public function alreadySent(Item $item, string $notificationType): bool

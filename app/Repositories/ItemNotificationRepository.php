@@ -44,6 +44,16 @@ class ItemNotificationRepository
         ]);
     }
 
+    public function markReportSent(string $notificationType, string $channel): ItemNotification
+    {
+        return ItemNotification::create([
+            'item_id' => null,
+            'notification_type' => $notificationType,
+            'sent_at' => now(),
+            'channel' => $channel,
+        ]);
+    }
+
     public function alreadySent(int $itemId, string $notificationType): bool
     {
         return ItemNotification::query()

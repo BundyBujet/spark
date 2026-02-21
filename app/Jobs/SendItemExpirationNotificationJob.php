@@ -36,7 +36,7 @@ class SendItemExpirationNotificationJob implements ShouldQueue
             return;
         }
 
-        $phone = config('items.notification_phone');
+        $phone = config('items.notification_phone_whatsapp');
         if (empty($phone)) {
             return;
         }

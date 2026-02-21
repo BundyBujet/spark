@@ -7,6 +7,7 @@ enum NotificationType: string
     case ExpiringSoon = 'expiring_soon';
     case Expired = 'expired';
     case TaskDue = 'task_due';
+    case Daily = 'daily';
 
     /**
      * @return array<string>

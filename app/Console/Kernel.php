@@ -14,6 +14,9 @@ class Kernel extends ConsoleKernel
     {
         $time = config('items.scheduler_time', '08:00');
         $schedule->command('items:check-expirations')->dailyAt($time);
+
+        $schedule->command('reports:daily')->dailyAt('12:00');
+        $schedule->command('reports:weekly')->weeklyOn(4, '0:00');
     }
 
     /**
