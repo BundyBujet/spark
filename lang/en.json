@@ -492,6 +492,10 @@
     "TELEGRAM_DATE": "Date",
     "TELEGRAM_GET_CHANNEL_ID": "Get Channel ID",
     "TELEGRAM_FILE": "Telegram File",
+    "TELEGRAM_STORAGE_UPLOAD_PROGRESS": "Uploading to server…",
+    "TELEGRAM_STORAGE_PROCESSING_MESSAGE": "Sending to Telegram in the background…",
+    "TELEGRAM_STORAGE_STATUS_TIMEOUT": "Status check timed out. The upload may still be running — check the list page.",
+    "TELEGRAM_STORAGE_LEAVE_WARNING": "Your file is still uploading. If you leave, the upload will be cancelled.",
 
     "ITEMS": "Items",
     "ITEMS_ADD": "Add item",

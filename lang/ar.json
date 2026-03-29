@@ -494,6 +494,10 @@
     "TELEGRAM_DATE": "التاريخ",
     "TELEGRAM_GET_CHANNEL_ID": "الحصول على معرف القناة",
     "TELEGRAM_FILE": "ملف تليجرام",
+    "TELEGRAM_STORAGE_UPLOAD_PROGRESS": "جارٍ الرفع إلى الخادم…",
+    "TELEGRAM_STORAGE_PROCESSING_MESSAGE": "جارٍ الإرسال إلى تليجرام في الخلفية…",
+    "TELEGRAM_STORAGE_STATUS_TIMEOUT": "انتهت مهلة التحقق من الحالة. قد يكون الرفع لا يزال جارياً — تحقق من صفحة القائمة.",
+    "TELEGRAM_STORAGE_LEAVE_WARNING": "ملفك لا يزال قيد الرفع. إذا غادرت، سيتم إلغاء الرفع.",
 
     "ITEMS": "العناصر",
     "ITEMS_ADD": "إضافة عنصر",
