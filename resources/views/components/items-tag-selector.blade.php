@@ -119,7 +119,7 @@
                         placeholder="{{ __('ITEMS_TAGS_SEARCH_PLACEHOLDER') }}"
                         class="form-input w-full rounded-lg ltr:pl-10 rtl:pr-10 rtl:pl-4 ltr:rtl:pr-4">
                 </div>
-                <div class="max-h-[280px] overflow-y-auto rounded-lg border border-[#e0e6ed] p-3 dark:border-[#1b2e4b]">
+                <div class="max-h-40 overflow-y-auto rounded-lg border border-[#e0e6ed] p-3 dark:border-[#1b2e4b]">
                     <div class="flex flex-wrap gap-2" x-data>
                         <template x-for="tag in filteredTags" :key="tag.id">
                             <button
